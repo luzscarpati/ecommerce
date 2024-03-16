@@ -27,3 +27,20 @@ components:
           email: marcostavares@gmail.com
           password: "1234"
           age: 44
+      LoginUser:
+        type: object
+        required: 
+          - first_name
+          - last_name
+          - email
+          - password 
+        properties:
+          email:
+            type: string
+            description: Mail del usuario
+          password:
+            type: string
+            description: Contraseña del usuario
+        example:
+          email: marcostavares@gmail.com
+          password: "1234"

@@ -40,6 +40,18 @@ components:
               id:
                 type: string
                 description: Id del usuario
+      LoginUser:
+        type: object
+        properties:
+          status:
+            type: number
+            description: Código de estado de la operación
+          message:
+            type: string
+            description: Mensaje de estado de la operación
+          data:
+            type: string
+            description: Token del usuario    
     errors:
       ValidationSchemaError:
         type: object
