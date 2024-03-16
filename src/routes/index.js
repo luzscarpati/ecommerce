@@ -1,8 +1,8 @@
 import { Router } from "express";
-import productRouter from "./products/productRouter.js"
+//import productRouter from "./products/productRouter.js"
 import userRouter from "./users/userRouter.js";
-import cartRouter from "./carts/cartRouter.js";
-import ticketRouter from "./tickets/ticketRouter.js";
+//import cartRouter from "./carts/cartRouter.js";
+//import ticketRouter from "./tickets/ticketRouter.js";
 
 export default class MainRouter {
     constructor() {

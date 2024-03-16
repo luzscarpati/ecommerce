@@ -13,14 +13,9 @@ const transporter = createTransport({
 });
 
 const createMsgRegister = (first_name) => {
-  return (
-    `<h2>Hola ${first_name}, ahora podés usar nuestros servicios</h2>`
-  )};
-
-const createMsgResetPass = (first_name) => {
     return (
-         `<p>${first_name}, hacé click <a href='http://localhost:8080/api/users/new-password'>ACÁ</a> para cambiar tu contraseña</p>`
-    )}
+      `<h2>Hola ${first_name}, ahora podés usar nuestros servicios</h2>`
+    )};
 
 export const sendMail = async ( user, service, token = null) => {
     try {

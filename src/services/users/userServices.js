@@ -12,7 +12,7 @@ export default class UserModel extends Services {
     register = async (user) => {
         try{
             const response = await userDao.register(user);
-            await sendMail(user, this.register);
+            await sendMail(user, 'register');
             return response
         }catch(error){
             throw new Error (error.message);

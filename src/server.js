@@ -8,7 +8,7 @@ import swaggerUi from "swagger-ui-express";
 import MainRouter from './routes/index.js';
 import config from './config/config.js';
 import { mongoStoreOptions } from './utils/utils.js';
-
+import { errorHandler } from "./middlewares/errorHandler.js";
 
 const mainRouter = new MainRouter();
 const app = express();
