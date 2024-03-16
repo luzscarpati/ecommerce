@@ -1,0 +1,29 @@
+components:
+  parameters:
+    schemas:
+      NewUser:
+        type: object
+        required:
+          - first_name
+          - last_name
+          - email
+          - password
+        properties:
+          first_name:
+            type: string
+            description: Nombre del Usurario
+          last_name:
+            type: string
+            description: Apellido del usuario
+          email:
+            type: string
+            description: Mail del usuario
+          password:
+            type: string
+            description: Contraseña del usuario
+        example:
+          first_name: Marcos
+          last_name: Tavares
+          email: marcostavares@gmail.com
+          password: "1234"
+          age: 44

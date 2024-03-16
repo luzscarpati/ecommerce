@@ -1,0 +1,91 @@
+components:
+  schema:
+    users:
+      PostUser:
+        type: object
+        properties:
+          status:
+            type: number
+            description: Código de estado de la operación
+          message:
+            type: string
+            description: Mensaje de estado de la operación
+          data:
+            type: object
+            properties:
+              first_name:
+                type: string
+                description: Nombre del Usurario
+              last_name:
+                type: string
+                description: Apellido del usuario
+              email:
+                type: string
+                description: Mail del usuario
+              password:
+                type: string
+                description: Contraseña del usuario
+              age:
+                type: number
+                description: Edad del usuario
+              role:
+                type: string
+                description: Rol del usuario
+              isGithub:
+                type: string
+                description: Registro mediante Github
+              isGoogle:
+                type: string
+                description: Registro mediante Gmail
+              id:
+                type: string
+                description: Id del usuario
+    errors:
+      ValidationSchemaError:
+        type: object
+        properties:
+          status:
+            type: number
+            description: Código de error
+          message:
+            type: string
+            description: Validation schema error
+          error:
+            type: string
+            description: No se pudo concretar la operación
+      NotFound:
+        type: object
+        properties:
+          status:
+            type: number
+            description: Código de estadp de la petición
+          message:
+            type: string
+            description: Error de servidor
+          error: 
+            type: string
+            description: Datos del error
+      ErrorGetById:
+        type: object
+        properties:
+          status: 
+            type: number
+            description: Código de error
+          message:
+            type: string
+            description: No se encontró el id en la base de datos
+          error:
+            type: string
+            description: El item no pudo ser encontrado   
+      ErrorUnauthorized:
+        type: object
+        properties:
+          status: 
+            type: number
+            description: Código de error
+          message:
+            type: string
+            description: No se encontró el id en la base de datos
+          error:
+            type: string
+            description: El item no pudo ser encontrado 

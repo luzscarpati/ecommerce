@@ -9,9 +9,13 @@ import MainRouter from './routes/index.js';
 import config from './config/config.js';
 import { mongoStoreOptions } from './utils/utils.js';
 import { errorHandler } from "./middlewares/errorHandler.js";
+import { info } from './docs/info.js';
 
 const mainRouter = new MainRouter();
 const app = express();
+
+const spects = swaggerJSDoc(info);
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(spects));
 
 app.use(session(mongoStoreOptions));
 app.use(passport.initialize());
@@ -22,8 +26,8 @@ app.use(cookieParser(config.SECRET_COOKIES));
 app.use(express.urlencoded({extended: true}));
 app.use(morgan('dev'));
 
-app.use(errorHandler);
 app.use('/api', mainRouter.getRouter())
+app.use(errorHandler);
 
 const PORT = config.PORT;
 
