@@ -52,6 +52,39 @@ components:
           data:
             type: string
             description: Token del usuario    
+      ProfileUser:
+        type: object
+        properties:
+          status:
+            type: number
+            description: Código de estado de la petición
+          message: 
+            type: string
+            description: Estado de la petición
+          data: 
+            type: object
+            description: Datos del Usuario
+            properties:
+              first_name:
+                type: string
+                description: Nombre de usuario
+              last_name:
+                type: string
+                description: Apellido del usuario
+              email:
+                type: string
+                description: Email del usuario
+              role:
+                type: string
+                description: Rol del usuario
+        example:
+          status: 200
+          message: Success
+          data:
+            first_name: "Luz"
+            last_name: "Scarpati"
+            email: "luz.scarpati@gmail"
+            role: "user"
     errors:
       ValidationSchemaError:
         type: object

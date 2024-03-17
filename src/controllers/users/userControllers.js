@@ -37,20 +37,21 @@ export default class UserController extends Controllers {
         };
     };
 
-    profile = async (req, res, next) => {
-        try {
-            const { first_name, last_name, email, role } = req.user;
-            return (
-                httpResponse.Ok(res, {
-                    first_name,
-                    last_name,
-                    email,
-                    role,
-                })
-            )
-        } catch (error) {
-            next(error)
-        };
-    };
+    profile = async (req, res, next) =>{
+        try{
+          const { first_name, last_name, email, role } = req.user;
+          return (
+            httpResponse.Ok(res, {
+              first_name,
+              last_name,
+              email,
+              role,
+              })
+          )
+        }catch(error){
+          next(error)
+        }
+      };
+      
 
 };

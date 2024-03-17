@@ -44,3 +44,8 @@ components:
         example:
           email: marcostavares@gmail.com
           password: "1234"
+  securitySchemes:
+    BearerAuth: 
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

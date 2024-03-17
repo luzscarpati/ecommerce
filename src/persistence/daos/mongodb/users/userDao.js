@@ -49,7 +49,7 @@ export default class UserMongoDao extends MongoDao {
         };
       } return false;
     } catch (error) {
-      throw new Error(error.menssage);
+      throw new Error(error.message);
     };
   };
 
@@ -65,6 +65,5 @@ export default class UserMongoDao extends MongoDao {
       throw error;
     };
   };
-
 
 };

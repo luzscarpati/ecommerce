@@ -1,24 +1,26 @@
 import jwt from "jsonwebtoken";
 import UserMongoDao from "../persistence/daos/mongodb/users/userDao.js";
 import config from "../config/config.js";
+import { HttpResponse, errorsDictionary } from "../utils/http.response.js";
 
 const userDao = new UserMongoDao();
 const SECRET_KEY = config.SECRET_KEY_JWT;
+const httpResponse = new HttpResponse();
 
 export const verifyToken = async (req, res, next) => {
     const authHeader = req.get('Authorization');
-    if(!authHeader) return res.status(401).json({msg: "User Unauthorized"});
+    if(!authHeader) return 
     try{
         const token = authHeader.split(" ")[1];
         const decode = jwt.verify(token, SECRET_KEY);
         console.log("Token decodificado");
         console.log(decode);
         const user = await userDao.getById(decode.userId);
-        if (!user) return res.status(400).json({msg: "User Unauthorized"});
+        if (!user) return httpResponse.Unauthorized(res, errorsDictionary.ERROR_TOKEN);
         req.user = user;
         next();
     }catch(error){
         console.log(error);
-        return res.status(401).json({msg: "User Unauthorized"});
+        return httpResponse.Unauthorized(res, errorsDictionary.ERROR_TOKEN);
     };
 };
