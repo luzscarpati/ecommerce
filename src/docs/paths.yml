@@ -159,3 +159,34 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schema/errors/NotFound'
+  
+  /api/users/delete:
+    delete:
+      tags:
+      - users
+      summary: Borrar usuarios inactivos
+      responses:
+        200:
+          description: Datos del usuario en cookie
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/users/GetAllUsers'
+        401:
+          description: Usuario no autorizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/errors/ErrorUnauthorized'
+        404: 
+          description: Error en validación del body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/errors/ValidationSchemaError'
+        500:
+          description: Error del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/errors/NotFound'

@@ -53,6 +53,18 @@ export default class UserController extends Controllers {
           next(error)
         }
       };
-      
+
+    deleteInactiveUsers = async (req, res, next) => {
+        try {
+            const deletedUsers = await userService.deleteInactiveUsers();
+            if(!deletedUsers){
+                return httpResponse.NotFound(res, errorsDictionary.ERROR_DELETE_ITEM);
+            }else {
+                return httpResponse.Ok(res, deletedUsers);
+            }
+        } catch(error){
+            next(error);
+        };
+    }     ;  
 
 };

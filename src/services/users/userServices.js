@@ -33,12 +33,24 @@ export default class UserModel extends Services {
         };
     };
     
-
     updateLastConnection = async (userId) => {
         try {
             await userDao.updateLastConnection(userId);
         } catch (error) {
             throw new Error(error.message);
-        }
+        };
     };
+
+    deleteInactiveUsers = async () => {
+        try{
+            const inactiveUsers = await userDao.deleteInactiveUsers();
+            inactiveUsers.forEach(user => {
+                sendMail(user, 'Usuario inactivo');
+            });
+        return inactiveUsers;
+
+        }catch(error){
+            throw new Error(error.message);
+        };
+    }
 };

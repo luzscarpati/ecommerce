@@ -12,6 +12,6 @@ router.post('/login', controller.login);
 router.get('/profile', verifyToken, controller.profile);
 router.get('/profile-cookie', checkAuthCookie, controller.profile);
 router.get('/all', verifyUser, controller.getAll);
-router.delete('delete', controller.delete);
+router.delete('/delete', verifyUser, controller.deleteInactiveUsers);
 
 export default router;

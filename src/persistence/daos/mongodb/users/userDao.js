@@ -77,4 +77,15 @@ export default class UserMongoDao extends MongoDao {
     };
   };
 
+  async deleteInactiveUsers () {
+    try{
+      const inactiveUsers = await this.model.find({ lastConnection: { $lt: new Date(Date.now() - 90 * 24 * 60 * 60 * 1000) } });
+      await this.model.deleteMany({ _id: { $in: inactiveUsers.map(user => user._id) } });
+      return inactiveUsers;
+
+    }catch(error){
+      throw new Error(error.message);
+    }
+  }
+
 };
