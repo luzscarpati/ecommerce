@@ -38,20 +38,22 @@ export default class UserMongoDao extends MongoDao {
 
   async login(user) {
     try {
-      const { email, password } = user;
-      const userExist = await this.getByEmail(email);
-      if (userExist) {
-        const passValid = isValidPassword(userExist, password);
-        if (!passValid) return false;
-        else {
-          const token = this.generateToken(userExist);
-          return token;
+        const { email, password } = user;
+        const userExist = await this.getByEmail(email);
+        if (userExist) {
+            const passValid = isValidPassword(userExist, password);
+            if (!passValid) return false;
+            else {
+                const token = this.generateToken(userExist);
+                return { token, userId: userExist._id }; 
+            };
         };
-      } return false;
+        return false;
     } catch (error) {
-      throw new Error(error.message);
-    };
-  };
+        throw new Error(error.message);
+    }
+};
+
 
   async getByEmail(email) {
     try {
@@ -63,6 +65,15 @@ export default class UserMongoDao extends MongoDao {
       return user;
     } catch (error) {
       throw error;
+    };
+  };
+
+  async updateLastConnection(userId) {
+    try {
+      const currentDate = new Date();
+      await this.model.findByIdAndUpdate(userId, { lastConnection: currentDate });
+    } catch (error) {
+      throw new Error(error.message);
     };
   };
 

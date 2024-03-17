@@ -50,8 +50,14 @@ components:
             type: string
             description: Mensaje de estado de la operación
           data:
-            type: string
-            description: Token del usuario    
+            type: object
+            properties:
+              token:
+                type: string
+                description: Token del usuario
+              userId:
+                type: string
+                description: Id del usuario    
       ProfileUser:
         type: object
         properties:

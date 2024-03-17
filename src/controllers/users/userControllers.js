@@ -25,17 +25,18 @@ export default class UserController extends Controllers {
 
     login = async (req, res, next) => {
         try {
-            const token = await userService.login(req.body);
-            if (!token) {
+            const { token, userId } = await userService.login(req.body);
+            if (!token || !userId) {
                 return httpResponse.Unauthorized(res, errorsDictionary.ERROR_TOKEN);
             } else {
                 res.cookie('token', token, { httpOnly: true });
-                return httpResponse.Ok(res, token);
-            };
+                return httpResponse.Ok(res, { token, userId }); 
+            }
         } catch (error) {
-            next(error)
-        };
+            next(error);
+        }
     };
+    
 
     profile = async (req, res, next) =>{
         try{
