@@ -128,3 +128,34 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schema/errors/NotFound'
+
+  /api/users/all:
+    get:
+      tags:
+      - users
+      summary: Listar todos los usuarios
+      responses:
+        200:
+          description: Datos del usuario en cookie
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/users/GetAllUsers'
+        401:
+          description: Usuario no autorizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/errors/ErrorUnauthorized'
+        404: 
+          description: Error en validación del body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/errors/ValidationSchemaError'
+        500:
+          description: Error del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/errors/NotFound'
