@@ -1,4 +1,4 @@
-//import ProductMongoDao from "./daos/mongodb/products/productDao.js";
+import ProductMongoDao from "./daos/mongodb/products/productDao.js";
 import UserMongoDao from "./daos/mongodb/users/userDao.js";
 //import CartsMongoDao from "./daos/mongodb/carts/cartDao.js";
 //import TicketMongoDao from "./daos/mongodb/tickets/ticketDao.js";
@@ -15,7 +15,7 @@ switch (persistence) {
     case "MONGO":
         await initMongoDB();
         userDao = new UserMongoDao();
-        //productDao = new ProductMongoDao();
+        productDao = new ProductMongoDao();
         //cartDao = new CartsMongoDao();
         //ticketDao = new TicketMongoDao();
         console.log(persistence);
