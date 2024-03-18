@@ -7,14 +7,14 @@ const userDao = new UserMongoDao();
 const SECRET_KEY = config.SECRET_KEY_JWT;
 const httpResponse = new HttpResponse()
 
-export const verifyUser =  async (req, res, next) => {
+export const verifyPremium =  async (req, res, next) => {
     try{
         const token = req.cookies.token;
         const decode = jwt.verify(token, SECRET_KEY);
         console.log('TOKEN DECODIFICADO');
         console.log(decode);
         const user = await userDao.getById(decode.userId);
-        if(user.role === 'admin' || user.role === 'premium'){
+        if(user.role === 'premium'){
             next()
         } else {
            return httpResponse.Unauthorized(res, errorsDictionary.ERROR_TOKEN);
@@ -24,4 +24,3 @@ export const verifyUser =  async (req, res, next) => {
         return httpResponse.Unauthorized(res, errorsDictionary.ERROR_TOKEN);
     }
   };
-  

@@ -26,8 +26,13 @@ export default class UserMongoDao extends MongoDao {
       const { email, password } = user;
       const existUser = await this.model.findOne({ email });
       if (!existUser) {
-        const newUser = await this.model.create({ ...user, password: createHash(password) });
-        return newUser;
+        if(email === 'adminCoder@coder.com' && password === 'adminCoder123'){
+          const newUser = await this.model.create({...user, password: createHash(password), role: 'admin'});
+          return (newUser);
+        } else {
+          const newUser = await this.model.create({ ...user, password: createHash(password) });
+          return (newUser);  
+        };
       } else {
         return false;
       }
