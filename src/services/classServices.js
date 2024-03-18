@@ -31,7 +31,7 @@ export default class Service {
 
     create = async (obj) => {
         try{
-            const newItem = await this.dap.create(obj);
+            const newItem = await this.dao.create(obj);
             if(!newItem){
                 return false;
             }else {
@@ -62,7 +62,7 @@ export default class Service {
             if(!item){
                 return false;
             }else {
-                const itemDeleted = await this.dap.delete(id);
+                const itemDeleted = await this.dao.delete(id);
                 return itemDeleted;
             }
         }catch(error){

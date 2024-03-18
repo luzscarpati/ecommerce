@@ -34,16 +34,20 @@ export default class Controllers {
         };
     };
 
-    create = async (req, res, next) => {
+    create = async(req, res, next) => {
         try{
-            const newItem = this.service.create(req.body);
-            if(!newItem){
-                return httpResponse.NotFound(res, errorsDictionary.ERROR_CREATE_ITEM);
-            }else{
-                return httpResponse.Ok(res, newItem);
+            const newItem = await this.service.create(req.body);
+            if(!newItem) {
+                return (
+                    httpResponse.NotFound(res, errorsDictionary.ERROR_CREATE_ITEM)
+                )
+            } else {
+             return (
+                httpResponse.Ok(res, newItem)
+             )   
             };
         }catch(error){
-            next(error)
+            next(error);
         };
     };
 
