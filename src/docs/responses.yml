@@ -127,6 +127,39 @@ components:
                   type: string
                   format: date-time
                   description: Fecha de última conexión en formato ISO 8601 (YYYY-MM-DDTHH:MM:SSZ)            
+    products: 
+      GetAllProducts:
+        type: object
+        properties:
+          status:
+            type: string
+            description: Código de la operación
+          message:
+            type: string
+            description: Estado de la operación
+          data:
+            type: array
+            description: Array con productos
+            items:
+              properties:
+                product_name:
+                  type: string
+                  description: Nombre del producto
+                product_description:
+                  type: string
+                  description: Descripción del producto
+                product_price:
+                  type: number
+                  description: Precio del producto
+                product_stock:
+                  type: number
+                  description: Cantidad de producto en stock
+                _id: 
+                  type: string
+                  description: Número de Id del producto
+                product_cathegory:
+                  type: string
+                  description: Categoría del producto
     errors:
       ValidationSchemaError:
         type: object

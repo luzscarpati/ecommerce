@@ -7,7 +7,7 @@ export const productSchema = new Schema({
   product_description: { type: String, required: true },
   product_price: { type: Number, required: true },
   product_stock: { type: Number, required: true },
-  product_categhory: { type: String, required: true},
+  product_cathegory: { type: String, required: true},
 });
 
 export const ProductModel = model(productsCollection, productSchema);
