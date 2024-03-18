@@ -45,7 +45,7 @@ export default class UserModel extends Services {
         try{
             const inactiveUsers = await userDao.deleteInactiveUsers();
             inactiveUsers.forEach(user => {
-                sendMail(user, 'Usuario inactivo');
+                sendMail(user, 'inactiveUser');
             });
         return inactiveUsers;
 

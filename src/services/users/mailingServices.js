@@ -19,7 +19,7 @@ const createMsgRegister = (first_name) => {
 
 const createMsgInactiveUser = (first_name) => {
     return (
-        `<h2>Hola ${first_name}, ahora podés usar nuestros servicios</h2>`
+        `<h2>Hola ${first_name}, dimos de baja tu cuenta por inactividad</h2>`
     )};
 
 export const sendMail = async ( user, service, token = null) => {
@@ -33,9 +33,9 @@ export const sendMail = async ( user, service, token = null) => {
             message = createMsgRegister(first_name);
             subj = 'Registro existoso';
             break;
-        case "Usuario inactivo":
+        case "inactiveUser":
             message = createMsgInactiveUser(first_name);
-            subj = 'Eliminación de cuenta por inactividad';
+            subj = 'Eliminación de cuenta';
             break;
         default:
             message = "";
