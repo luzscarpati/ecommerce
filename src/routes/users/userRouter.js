@@ -3,6 +3,8 @@ import { verifyToken } from "../../middlewares/verifyToken.js";
 import UserController from "../../controllers/users/userControllers.js";
 import { checkAuthCookie } from "../../middlewares/authJwtCookies.js";
 import { verifyUser } from "../../middlewares/verifyUser.js";
+import { uploader } from "../../middlewares/uploader.js";
+
 
 const controller = new UserController();
 const router = Router();
@@ -13,5 +15,5 @@ router.get('/profile', verifyToken, controller.profile);
 router.get('/profile-cookie', checkAuthCookie, controller.profile);
 router.get('/all', verifyUser, controller.getAll);
 router.delete('/delete', verifyUser, controller.deleteInactiveUsers);
-
+router.post('/profile-img', verifyToken, uploader.single('profile'), controller.uploaderImg)
 export default router;

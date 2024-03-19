@@ -65,6 +65,21 @@ export default class UserController extends Controllers {
         } catch(error){
             next(error);
         };
-    }     ;  
+    };
+    
+    uploaderImg = async (req, res, next) => {
+        try{
+            const user = req.user.id;
+            if(!req.file || !user){
+                return httpResponse.ServerError(res, errorsDictionary.ERROR_UPLOAD_DOCUMENT)
+            }else {
+                const path = req.file.path;
+                const userImg = await userService.uploaderImg(user, path);
+                return httpResponse.Ok(res, userImg); 
+            }
+        } catch (error){
+            next(error);
+        };
+    };
 
 };

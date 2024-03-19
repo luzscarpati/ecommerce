@@ -19,7 +19,8 @@ export const errorsDictionary = {
   ERROR_TOKEN: 'Token expired',
   ERROR_PASSWORD: 'Password equal',
   ERROR_UPLOAD_DOCUMENT: 'No se pudo cargar el archivo',
-  ERROR_GET_ALL: 'No se pudo listar todos los itemas'
+  ERROR_GET_ALL: 'No se pudo listar todos los itemas',
+  ERROR_UPLOAD_DOCUMENT: 'No se pudo cargar el documento'
   
 }
 

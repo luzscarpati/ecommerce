@@ -41,6 +41,21 @@ export default class UserModel extends Services {
         };
     };
 
+    uploaderImg = async (user, path) => {
+        try {
+            const userId  = await userDao.getById(user);
+            if (!userId) {
+                return false;
+            } else {
+                const updatedUser = await userDao.updateImg(userId, path);
+                return updatedUser;
+            };
+        } catch (error) {
+            throw new Error(error.message);
+        };
+    };
+    
+
     deleteInactiveUsers = async () => {
         try{
             const inactiveUsers = await userDao.deleteInactiveUsers();
@@ -52,5 +67,6 @@ export default class UserModel extends Services {
         }catch(error){
             throw new Error(error.message);
         };
-    }
+    };
+
 };

@@ -26,12 +26,12 @@ export default class UserMongoDao extends MongoDao {
       const { email, password } = user;
       const existUser = await this.model.findOne({ email });
       if (!existUser) {
-        if(email === 'adminCoder@coder.com' && password === 'adminCoder123'){
-          const newUser = await this.model.create({...user, password: createHash(password), role: 'admin'});
+        if (email === 'adminCoder@coder.com' && password === 'adminCoder123') {
+          const newUser = await this.model.create({ ...user, password: createHash(password), role: 'admin' });
           return (newUser);
         } else {
           const newUser = await this.model.create({ ...user, password: createHash(password) });
-          return (newUser);  
+          return (newUser);
         };
       } else {
         return false;
@@ -43,21 +43,21 @@ export default class UserMongoDao extends MongoDao {
 
   async login(user) {
     try {
-        const { email, password } = user;
-        const userExist = await this.getByEmail(email);
-        if (userExist) {
-            const passValid = isValidPassword(userExist, password);
-            if (!passValid) return false;
-            else {
-                const token = this.generateToken(userExist);
-                return { token, userId: userExist._id }; 
-            };
+      const { email, password } = user;
+      const userExist = await this.getByEmail(email);
+      if (userExist) {
+        const passValid = isValidPassword(userExist, password);
+        if (!passValid) return false;
+        else {
+          const token = this.generateToken(userExist);
+          return { token, userId: userExist._id };
         };
-        return false;
+      };
+      return false;
     } catch (error) {
-        throw new Error(error.message);
+      throw new Error(error.message);
     }
-};
+  };
 
 
   async getByEmail(email) {
@@ -82,15 +82,37 @@ export default class UserMongoDao extends MongoDao {
     };
   };
 
-  async deleteInactiveUsers () {
-    try{
+  async deleteInactiveUsers() {
+    try {
       const inactiveUsers = await this.model.find({ lastConnection: { $lt: new Date(Date.now() - 90 * 24 * 60 * 60 * 1000) } });
       await this.model.deleteMany({ _id: { $in: inactiveUsers.map(user => user._id) } });
       return inactiveUsers;
 
-    }catch(error){
+    } catch (error) {
+      throw new Error(error.message);
+    };
+  };
+
+  updateImg = async (userId, imagePath) => {
+    try {
+      const updatedUser = await this.model.findOneAndUpdate(
+        { _id: userId },
+        { $set: { image: imagePath } },
+        { new: true }
+      );
+      if (userId.role != "admin" || userId.role != "premium") {
+        const updatedUser = await this.model.findOneAndUpdate(
+          { _id: userId },
+          { $set: { role: 'premium' } },
+          { new: true }
+        );
+        return updatedUser;
+      }
+      return updatedUser;
+    } catch (error) {
       throw new Error(error.message);
     }
-  }
+  };
+
 
 };
