@@ -22,6 +22,11 @@ const createMsgInactiveUser = (first_name) => {
         `<h2>Hola ${first_name}, dimos de baja tu cuenta por inactividad</h2>`
     )};
 
+const createMGdeleteProduct = (first_name) => {
+    return (
+        `<h2>Hola ${first_name}, su producto fue eliimnado</h2>`
+    )};
+
 export const sendMail = async ( user, service, token = null) => {
     try {
         const { first_name, email } = user;
@@ -36,6 +41,10 @@ export const sendMail = async ( user, service, token = null) => {
         case "inactiveUser":
             message = createMsgInactiveUser(first_name);
             subj = 'Eliminación de cuenta';
+            break;
+        case "deleteproduct":
+            message = createMGdeleteProduct(first_name);
+            subj = "Eliminación de producto";
             break;
         default:
             message = "";

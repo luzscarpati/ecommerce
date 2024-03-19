@@ -15,7 +15,7 @@ export const verifyUser = async (req, res, next) => {
         console.log(decode);
         const user = await userDao.getById(decode.userId);
 
-        if (user) {
+        if (user && user.role ==='admin' || user.role === 'premium') {
             req.user = user;
             next();
         } else {
