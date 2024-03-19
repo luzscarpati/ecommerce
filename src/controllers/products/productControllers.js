@@ -28,8 +28,13 @@ export default class ProductController extends Controllers {
             if (!item) {
                 return httpResponse.NotFound(res, errorsDictionary.ERROR_DELETE_ITEM)
             } else {
-                if (email != item.product_owner) {
-                    return httpResponse.Unauthorized(res, errorsDictionary.ERROR_TOKEN);
+                if (req.user.role != 'admin') {
+                    if (email != item.product_owner) {
+                        return httpResponse.Unauthorized(res, errorsDictionary.ERROR_TOKEN);
+                    } else {
+                        const deleteItem = await productService.delete(id);
+                        return httpResponse.Ok(res, deleteItem);
+                    };
                 } else {
                     const deleteItem = await productService.delete(id);
                     return httpResponse.Ok(res, deleteItem);
