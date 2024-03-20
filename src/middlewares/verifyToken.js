@@ -9,7 +9,7 @@ const httpResponse = new HttpResponse();
 
 export const verifyToken = async (req, res, next) => {
     const authHeader = req.get('Authorization');
-    if(!authHeader) return 
+    if(!authHeader) return httpResponse.Unauthorized(res, errorsDictionary.ERROR_TOKEN);
     try{
         const token = authHeader.split(" ")[1];
         const decode = jwt.verify(token, SECRET_KEY);
