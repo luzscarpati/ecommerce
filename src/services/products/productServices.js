@@ -1,8 +1,10 @@
 import Services from "../classServices.js";
 import persistence from "../../persistence/persistence.js";
 import { sendMail } from "../users/mailingServices.js";
+import ProductsRepository from "../../persistence/dtos/repository/products/productsRepository.js";
 
 const { productDao, userDao } = persistence;
+const productRepository = new ProductsRepository();
 
 export default class ProductService extends Services {
     constructor(){
@@ -30,6 +32,19 @@ export default class ProductService extends Services {
                 await sendMail(user, 'deleteproduct')
                 return itemDeleted;
             }
+        }catch(error){
+            throw new Error(error.message);
+        };
+    };
+
+    getProductById = async (id) => {
+        try{
+            const product = await productRepository.getProductById(id);
+            if(!product){
+                return false;
+            }else {
+                return product;
+            };
         }catch(error){
             throw new Error(error.message);
         };

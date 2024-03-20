@@ -159,6 +159,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schema/errors/NotFound'
+      security:
+        - BearerAuth: []
   
   /api/users/delete:
     delete:

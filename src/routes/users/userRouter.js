@@ -13,7 +13,8 @@ router.post('/register', controller.register);
 router.post('/login', controller.login);
 router.get('/profile', verifyToken, controller.profile);
 router.get('/profile-cookie', checkAuthCookie, controller.profile);
-router.get('/all', verifyUser, controller.getAll);
+router.get('/all', verifyToken, controller.getAll);
 router.delete('/delete', verifyUser, controller.deleteInactiveUsers);
 router.post('/profile-img', verifyToken, uploader.single('profile'), controller.uploaderImg)
+
 export default router;

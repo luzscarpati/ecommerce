@@ -4,6 +4,7 @@ import { sendMail } from "../users/mailingServices.js";
 
 const { userDao } = persistence;
 
+
 export default class UserModel extends Services {
     constructor() {
         super(userDao);
