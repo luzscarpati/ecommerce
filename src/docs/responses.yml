@@ -190,6 +190,68 @@ components:
               product_cathegory:
                 type: string
                 description: Categoría del producto
+    carts:
+      GetAllCarts:
+        type: object
+        properties:
+          status:
+            type: string
+            description: Código de la operación
+          message:
+            type: string
+            description: Estado de la operación
+          data:
+            type: array
+            description: Array de carritos del usuario
+            items:
+              properties:
+                id:
+                  type: string
+                  description: Nombre del producto
+                owner:
+                  type: string
+                  description: Mail del usuario que creó el carrito
+                products:
+                  type: array
+                  description: Array de productos en carrito
+                  items:
+                    properties:
+                      id:
+                        type: string
+                        description: Id de producto en carrito
+                      quantity: 
+                        type: number
+                        description: Cantidad de producto en carrito
+      Cart:
+        type: object
+        properties:
+          status:
+            type: string
+            description: Código de la operación
+          message:
+            type: string
+            description: Estado de la operación
+          data:
+            type: object 
+            description: Carrito creado
+            properties:
+              id:
+                type: string
+                description: Nombre del producto
+              owner:
+                type: string
+                description: Mail del usuario que creó el carrito
+              products:
+                type: array
+                description: Array de productos en carrito
+                items:
+                  properties:
+                    id:
+                      type: string
+                      description: Id de producto en carrito
+                    quantity: 
+                      type: number
+                      description: Cantidad de producto en carrito
     errors:
       ValidationSchemaError:
         type: object

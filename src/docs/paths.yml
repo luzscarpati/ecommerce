@@ -136,7 +136,7 @@ paths:
       summary: Listar todos los usuarios
       responses:
         200:
-          description: Datos del usuario en cookie
+          description: Lista de usuario registrados
           content:
             application/json:
               schema:
@@ -169,7 +169,7 @@ paths:
       summary: Borrar usuarios inactivos
       responses:
         200:
-          description: Datos del usuario en cookie
+          description: Se borraron los usuarios inactivos
           content:
             application/json:
               schema:
@@ -210,7 +210,7 @@ paths:
                   format: binary
       responses:
         200:
-          description: Datos del usuario en cookie
+          description: La imagen se cargó correctamente 
           content:
             application/json:
               schema:
@@ -278,7 +278,7 @@ paths:
         required: true
       responses:
         200:
-          description: Crear producto
+          description: Se creó el producto correctamente
           content:
             application/json:
               schema:
@@ -393,7 +393,7 @@ paths:
             type: string
       responses:
         200:
-          description: Producto encontrado
+          description: Se eliminó el producto correctamente
           content:
             application/json:
               schema:
@@ -417,4 +417,100 @@ paths:
               schema:
                 $ref: '#/components/schema/errors/NotFound'
       
-    
+  /api/carts/:
+    get:
+      tags:
+      - carts
+      summary: Listar todos los carritos de usuario
+      responses:
+        200:
+          description: Lista de carritos de un usuario
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/carts/GetAllCarts'
+        401:
+          description: Usuario no autorizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/errors/ErrorUnauthorized'
+        404: 
+          description: Error en validación del body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/errors/ValidationSchemaError'
+        500:
+          description: Error del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/errors/NotFound'
+    post:
+      tags:
+      - carts
+      summary: Crear un carrito
+      responses:
+        200:
+          description: Carrito creado con éxito
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/carts/Cart'
+        401:
+          description: Usuario no autorizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/errors/ErrorUnauthorized'
+        404: 
+          description: Error en validación del body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/errors/ValidationSchemaError'
+        500:
+          description: Error del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/errors/NotFound'
+
+  /api/carts/{id}:
+    delete: 
+      tags:
+      - carts
+      summary: Borrar un carrito del usuario
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: Id del producto a liminar
+          schema:
+            type: string
+      responses:
+        200:
+          description: El carrito se eliminó con éxito
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/carts/Cart'
+        401:
+          description: Usuario no autorizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/errors/ErrorUnauthorized'
+        404: 
+          description: Error en validación del body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/errors/ValidationSchemaError'
+        500:
+          description: Error del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/errors/NotFound'
