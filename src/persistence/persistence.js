@@ -1,6 +1,6 @@
 import ProductMongoDao from "./daos/mongodb/products/productDao.js";
 import UserMongoDao from "./daos/mongodb/users/userDao.js";
-//import CartsMongoDao from "./daos/mongodb/carts/cartDao.js";
+import CartsMongoDao from "./daos/mongodb/carts/cartDao.js";
 //import TicketMongoDao from "./daos/mongodb/tickets/ticketDao.js";
 import 'dotenv/config';
 import { initMongoDB} from "../config/connection.js";
@@ -16,7 +16,7 @@ switch (persistence) {
         await initMongoDB();
         userDao = new UserMongoDao();
         productDao = new ProductMongoDao();
-        //cartDao = new CartsMongoDao();
+        cartDao = new CartsMongoDao();
         //ticketDao = new TicketMongoDao();
         console.log(persistence);
         break;

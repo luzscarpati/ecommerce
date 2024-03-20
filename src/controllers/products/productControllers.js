@@ -44,18 +44,4 @@ export default class ProductController extends Controllers {
             return next(error);
         };
     };
-
-    getById = async (req, res, next) => {
-        try{
-            const { id } = req.params;
-            const item = await this.service.getProductById(id);
-            if(!item){
-                return httpResponse.NotFound(res, errorsDictionary.ERROR_FIND_ITEM);
-            }else {
-                return httpResponse.Ok(res, item)
-            }
-        }catch(error){
-            next(error)
-        };
-    };
 };
