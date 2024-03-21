@@ -7,7 +7,7 @@ const router = Router();
 const controller = new CartController();
 
 router.get('/', checkAuthCookie, controller.getAllCarts);
-router.get('/:id', verifyToken, controller.getById);
+router.get('/:id', checkAuthCookie, controller.getCartById);
 router.post("/", checkAuthCookie, controller.createCart);
 router.put('/:id', controller.update);
 router.delete("/:id", checkAuthCookie ,controller.remove);

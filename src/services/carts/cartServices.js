@@ -45,9 +45,25 @@ export default class CartService extends Services {
                 return cartDel;
             };
         } catch (error) {
-            console.log(error);
             throw new Error(error.message);
         }
+    };
+
+    async getCartById(idCart, email) {
+        try{
+            const cart = await cartDao.getById(idCart);
+            if(!cart){
+                return false
+            }else {
+                if (cart.owner !== email){
+                    return false
+                }else{
+                    return cart;
+                };
+            };
+        }catch(error){
+            throw new Error(error.message);
+        };
     };
 
 

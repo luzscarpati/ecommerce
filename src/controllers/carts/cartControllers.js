@@ -13,7 +13,6 @@ export default class CartController extends Controllers {
     createCart = async (req, res, next) => {
         try {
             const { email } = req.user;
-            console.log("EMAIL - CONTROLLER --->", email);
             const newItem = await cartService.createCart(req.body, email);
 
             return httpResponse.Ok(res, newItem);
@@ -56,6 +55,21 @@ export default class CartController extends Controllers {
             next(error);
         }
     };
+
+    getCartById = async (req, res, next) => {
+        try{
+            const { email } = req.user;
+            const {id } = req.params;
+            const cart = await cartService.getCartById(id, email);
+            if(!cart){
+                return httpResponse.NotFound(res, errorsDictionary.ERROR_FIND_ITEM)
+            }else {
+                return httpResponse.Ok(res, cart);
+            }
+        }catch(error){
+            next(error)
+        }
+    }
 
     addProdToCart = async (req, res, next) => {
         try {
