@@ -90,7 +90,8 @@ export default class CartService extends Services {
                 if (existProdInCart) {
                     existProdInCart.quantity++;
                     existCart.save();
-                    return existProdInCart;
+                    const updatedCart = await cartDao.getById(cartId);
+                    return updatedCart;
                 } else {
                     const updatedCart = await cartDao.addProdToCart(existCart, prodId);
                     return updatedCart

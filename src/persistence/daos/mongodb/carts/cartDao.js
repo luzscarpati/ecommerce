@@ -35,6 +35,7 @@ export default class CartsMongoDao extends MongoDao {
             existCart.products.push(newProd);
             await this.model.updateOne({_id: existCart._id}, existCart);
             const response = await CartModel.find({_id: existCart._id})
+            console.log(response)
             return response;
         }catch(error){
             console.log(error);
