@@ -73,14 +73,15 @@ export default class CartController extends Controllers {
 
     addProdToCart = async (req, res, next) => {
         try {
+            const { email } = req.user;
             const { idCart, idProd } = req.params;
-            const newProdToUserCart = await cartService.addProdToCart(idCart, idProd);
+            const newProdToUserCart = await cartService.addProdToCart(idCart, idProd, email);
             if (!newProdToUserCart) {
                 return (
                     httpResponse.NotFound(res, errorsDictionary.ERROR_ADD_TO_CART)
                 )
             } else {
-                httpResponse.Ok(res, newProdToUserCart)
+               return httpResponse.Ok(res, newProdToUserCart)
             };
         } catch (error) {
             next(error);

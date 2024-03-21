@@ -68,28 +68,33 @@ export default class CartService extends Services {
 
 
 
-    async addProdToCart(cartId, prodId) {
+    async addProdToCart(cartId, prodId, email) {
         try {
             const existCart = await cartDao.getById(cartId);
             if (!existCart) {
                 return false;
             }
-            const existProd = await productDao.getById(prodId);
-            if (!existProd) {
-                return false;
-            }
-            //SI EXISTE, aumenta quantity++
-            const existProdInCart = existCart.products.find(
-                (p) => {
-                    return p.product._id.toString() === prodId.toString();
+            if (existCart.owner !== email){
+                return false
+            }else {
+                const existProd = await productDao.getById(prodId);
+                if (!existProd) {
+                    return false;
                 }
-            );
-            if (existProdInCart) {
-                existProdInCart.quantity++;
-                existCart.save();
-                return existProdInCart;
-            } else {
-                return await cartDao.addProdToCart(existCart, prodId);
+                //SI EXISTE, aumenta quantity++
+                const existProdInCart = existCart.products.find(
+                    (p) => {
+                        return p.product._id.toString() === prodId.toString();
+                    }
+                );
+                if (existProdInCart) {
+                    existProdInCart.quantity++;
+                    existCart.save();
+                    return existProdInCart;
+                } else {
+                    const updatedCart = await cartDao.addProdToCart(existCart, prodId);
+                    return updatedCart
+                }
             }
         } catch (error) {
             console.log(error);
