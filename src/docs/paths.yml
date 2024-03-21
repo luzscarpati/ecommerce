@@ -486,12 +486,92 @@ paths:
         - in: path
           name: id
           required: true
-          description: Id del producto a liminar
+          description: Id del carrito  a eliminar
           schema:
             type: string
       responses:
         200:
           description: El carrito se eliminó con éxito
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/carts/Cart'
+        401:
+          description: Usuario no autorizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/errors/ErrorUnauthorized'
+        404: 
+          description: Error en validación del body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/errors/ValidationSchemaError'
+        500:
+          description: Error del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/errors/NotFound'
+    get: 
+      tags:
+      - carts
+      summary: Buscar carrito por Id
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: Id del carrito a buscar
+          schema:
+            type: string
+      responses:
+        200:
+          description: Carrito encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/carts/Cart'
+        401:
+          description: Usuario no autorizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/errors/ErrorUnauthorized'
+        404: 
+          description: Error en validación del body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/errors/ValidationSchemaError'
+        500:
+          description: Error del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/errors/NotFound'
+
+  /api/carts/{idCart}/products/{idProd}:
+    post: 
+      tags:
+      - carts
+      summary: Agregar producto al carrito
+      parameters:
+        - in: path
+          name: idCart
+          required: true
+          description: Id del carrito a buscar
+          schema:
+            type: string
+        - in: path
+          name: idProd
+          required: true
+          description: Id del producto
+          schema:
+            type: string
+      responses:
+        200:
+          description: Producto agregado con éxito
           content:
             application/json:
               schema:
