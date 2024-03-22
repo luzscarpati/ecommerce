@@ -252,6 +252,18 @@ components:
                     quantity: 
                       type: number
                       description: Cantidad de producto en carrito
+      ClearCart:
+        type: object
+        properties:
+          status:
+            type: string
+            description: Código de la operación
+          message:
+            type: string
+            description: Estado de la operación
+          data:
+            type: object 
+            description: Carrito creado
     errors:
       ValidationSchemaError:
         type: object

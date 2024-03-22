@@ -65,4 +65,17 @@ export default class CartsMongoDao extends MongoDao {
         };
     };
 
+    async clearCart(cart) {
+        try {
+            if (!cart) {
+                return false
+            }
+            cart.products = [];
+            const updatedCart = await cart.save();
+            return updatedCart;
+        } catch (error) {
+            console.error(error);
+            throw new Error("Error clearing cart");
+        };
+    };
 };

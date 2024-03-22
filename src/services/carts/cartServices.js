@@ -157,7 +157,7 @@ export default class CartService extends Services {
             if (!existCart) {
                 return false;
             } else {
-                return await cartDao.delete(existCart);
+                return await cartDao.clearCart(existCart);
             }
             }
         } catch (error) {

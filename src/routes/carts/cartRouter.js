@@ -9,7 +9,6 @@ const controller = new CartController();
 router.get('/', checkAuthCookie, controller.getAllCarts);
 router.get('/:id', checkAuthCookie, controller.getCartById);
 router.post("/", checkAuthCookie, controller.createCart);
-router.put('/:id', controller.update);
 router.delete("/:id", checkAuthCookie ,controller.remove);
 router.post("/:idCart/products/:idProd", checkAuthCookie ,controller.addProdToCart);
 router.delete("/:idCart/products/:idProd",checkAuthCookie, controller.removeProdToCart);

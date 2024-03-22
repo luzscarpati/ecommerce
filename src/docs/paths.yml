@@ -594,3 +594,83 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schema/errors/NotFound'
+    delete:
+      tags:
+      - carts
+      summary: Agregar producto al carrito
+      parameters:
+        - in: path
+          name: idCart
+          required: true
+          description: Id del carrito a buscar
+          schema:
+            type: string
+        - in: path
+          name: idProd
+          required: true
+          description: Id del producto
+          schema:
+            type: string
+      responses:
+        200:
+          description: Producto agregado con éxito
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/carts/Cart'
+        401:
+          description: Usuario no autorizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/errors/ErrorUnauthorized'
+        404: 
+          description: Error en validación del body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/errors/ValidationSchemaError'
+        500:
+          description: Error del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/errors/NotFound'
+
+  /api/carts/clear/{idCart}:
+    delete:
+      tags:
+      - carts
+      summary: Agregar producto al carrito
+      parameters:
+        - in: path
+          name: idCart
+          required: true
+          description: Id del carrito a buscar
+          schema:
+            type: string
+      responses:
+        200:
+          description: Producto agregado con éxito
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/carts/ClearCart'
+        401:
+          description: Usuario no autorizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/errors/ErrorUnauthorized'
+        404: 
+          description: Error en validación del body
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/errors/ValidationSchemaError'
+        500:
+          description: Error del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schema/errors/NotFound'
