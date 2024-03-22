@@ -91,7 +91,9 @@ export default class CartController extends Controllers {
     removeProdToCart = async (req, res, next) => {
         try {
             const { idCart, idProd } = req.params;
-            const delProdToUserCart = await service.removeProdToCart(idCart, idProd);
+            const { email } = req.user;
+            console.log('EMAIL - CONTROLLER --->', email);
+            const delProdToUserCart = await cartService.removeProdToCart(idCart, idProd, email);
             if (!delProdToUserCart) {
                 return (
                     httpResponse.NotFound(res, errorsDictionary.ERROR_DELETE_TO_CART)

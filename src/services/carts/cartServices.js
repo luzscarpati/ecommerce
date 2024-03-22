@@ -102,30 +102,30 @@ export default class CartService extends Services {
         }
     };
 
-    async removeProdToCart(cartId, prodId) {
+    async removeProdToCart(cartId, prodId, email) {
         try {
             const existCart = await cartDao.getById(cartId);
             console.log("existCart-->", existCart);
-
-            if (!existCart) {
-                throw new Error("Cart not found");
-            }
-
-            const existProd = await productDao.getById(prodId);
-            console.log("existProd-->", existProd);
-
-            if (!existProd) {
-                throw new Error("Product not found");
-            }
-
-            const existProdInCart = existCart.products.find((p) => p.product._id.toString() === prodId.toString());
-
-            if (existProdInCart && existProdInCart.quantity > 0) {
-                existProdInCart.quantity--;
-                await existCart.save();
-                return existProdInCart;
-            } else {
-                return await cartDao.removeProdToCart(existCart, prodId);
+            if (existCart.owner !== email){
+                return false
+            }else {
+                if (!existCart) {
+                    return false
+                }
+                const existProd = await productDao.getById(prodId);
+                console.log("existProd-->", existProd);
+                if (!existProd) {
+                    return false
+                }
+                const existProdInCart = existCart.products.find((p) => p.product._id.toString() === prodId.toString());
+    
+                if (existProdInCart && existProdInCart.quantity > 0) {
+                    existProdInCart.quantity--;
+                    await existCart.save();
+                    return existProdInCart;
+                } else {
+                    return await cartDao.removeProdToCart(existCart, prodId);
+                }
             }
         } catch (error) {
             console.log(error);
