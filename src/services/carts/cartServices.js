@@ -81,7 +81,6 @@ export default class CartService extends Services {
                 if (!existProd) {
                     return false;
                 }
-                //SI EXISTE, aumenta quantity++
                 const existProdInCart = existCart.products.find(
                     (p) => {
                         return p.product._id.toString() === prodId.toString();
@@ -105,7 +104,6 @@ export default class CartService extends Services {
     async removeProdToCart(cartId, prodId, email) {
         try {
             const existCart = await cartDao.getById(cartId);
-            console.log("existCart-->", existCart);
             if (existCart.owner !== email){
                 return false
             }else {
@@ -113,7 +111,6 @@ export default class CartService extends Services {
                     return false
                 }
                 const existProd = await productDao.getById(prodId);
-                console.log("existProd-->", existProd);
                 if (!existProd) {
                     return false
                 }
@@ -151,14 +148,17 @@ export default class CartService extends Services {
         }
     };
 
-    async clearCart(cartId) {
+    async clearCart(cartId, email) {
         try {
             const existCart = await cartDao.getById(cartId);
-            console.log("existCart-->", existCart);
+            if (existCart.owner !== email){
+                return false
+            }else {
             if (!existCart) {
                 return false;
             } else {
-                return await cartDao.clearCart(existCart);
+                return await cartDao.delete(existCart);
+            }
             }
         } catch (error) {
             console.log(error);

@@ -13,6 +13,6 @@ router.put('/:id', controller.update);
 router.delete("/:id", checkAuthCookie ,controller.remove);
 router.post("/:idCart/products/:idProd", checkAuthCookie ,controller.addProdToCart);
 router.delete("/:idCart/products/:idProd",checkAuthCookie, controller.removeProdToCart);
-router.delete("/clear/:idCart", controller.clearCart);
+router.delete("/clear/:idCart", checkAuthCookie, controller.clearCart);
 
 export default router;

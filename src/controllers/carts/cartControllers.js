@@ -134,10 +134,11 @@ export default class CartController extends Controllers {
     clearCart = async (req, res, next) => {
         try {
             const { idCart } = req.params;
-            const clearCart = await cartService.clearCart(idCart);
+            const { email } = req.user;
+            const clearCart = await cartService.clearCart(idCart, email);
             if (!clearCart) {
                 return (
-                    httpResponse.NotFound(res, "Error clear cart")
+                    httpResponse.NotFound(res, errorsDictionary.ERROR_DELETE_ITEM)
                 )
             } else {
                 return (
