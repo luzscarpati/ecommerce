@@ -263,7 +263,36 @@ components:
             description: Estado de la operación
           data:
             type: object 
-            description: Carrito creado
+            description: Carrito vaciado
+    tickets:
+      ticket:
+        type: object
+        properties:
+          status:
+            type: string
+            description: Código de la operación
+          message:
+            type: string
+            description: Estado de la operación
+          data:
+            type: object 
+            description: Ticket creado
+            properties:
+              id:
+                type: string
+                description: Id del ticket
+              code:
+                type: string
+                description: Código de compra
+              purchase_datetime:
+                type: string
+                description: Fecha de compra
+              amount:
+                type: number
+                description: Precio a pagar
+              purchaser: 
+                type: string
+                description: Comprador
     errors:
       ValidationSchemaError:
         type: object
