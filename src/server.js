@@ -14,7 +14,7 @@ import cors from "cors";
 
 const mainRouter = new MainRouter();
 const app = express();
-app.use(cors({ origin: 'https://ecommerce-evk9.onrender.com' }));
+app.use(cors({ origin: 'https://ecommerce-fpta.onrender.com' }));
 
 const spects = swaggerJSDoc(info);
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(spects));
