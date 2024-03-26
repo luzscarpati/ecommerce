@@ -2,7 +2,6 @@ import { Router } from "express";
 import { verifyToken } from "../../middlewares/verifyToken.js";
 import UserController from "../../controllers/users/userControllers.js";
 import { checkAuthCookie } from "../../middlewares/authJwtCookies.js";
-import { verifyUser } from "../../middlewares/verifyUser.js";
 import { uploader } from "../../middlewares/uploader.js";
 
 
@@ -11,10 +10,9 @@ const router = Router();
 
 router.post('/register', controller.register);
 router.post('/login', controller.login);
-router.get('/profile', verifyToken, controller.profile);
 router.get('/profile-cookie', checkAuthCookie, controller.profile);
 router.get('/all', verifyToken, controller.getAll);
-router.delete('/delete', verifyUser, controller.deleteInactiveUsers);
-router.post('/profile-img', verifyToken, uploader.single('profile'), controller.uploaderImg)
+router.delete('/delete', verifyToken, controller.deleteInactiveUsers);
+router.post('/profile-img', checkAuthCookie, uploader.single('profile'), controller.uploaderImg)
 
 export default router;

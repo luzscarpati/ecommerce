@@ -16,9 +16,13 @@ export const verifyToken = async (req, res, next) => {
         console.log("Token decodificado");
         console.log(decode);
         const user = await userDao.getById(decode.userId);
-        if (!user) return httpResponse.Unauthorized(res, errorsDictionary.ERROR_TOKEN);
-        req.user = user;
+        if (!user || user.role != 'admin'){
+            console.log(user.role)
+            return httpResponse.Unauthorized(res, errorsDictionary.ERROR_TOKEN);
+        }else {
+            req.user = user;
         next();
+        };
     }catch(error){
         console.log(error);
         return httpResponse.Unauthorized(res, errorsDictionary.ERROR_TOKEN);
