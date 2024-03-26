@@ -16,7 +16,7 @@ Antes de comenzar, asegúrate de configurar el entorno adecuadamente (ver la sec
 
 Para iniciar el servidor, ejecuta el siguiente comando:
 
-npm start MONGO
+`npm start MONGO`
 
 
 El servidor se iniciará en el puerto especificado en la configuración.
