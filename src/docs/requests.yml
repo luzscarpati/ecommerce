@@ -75,7 +75,7 @@ components:
           product_stock: 5
           product_cathegory: Una categoria
     securitySchemes:
-    BearerAuth: 
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
+      BearerAuth: 
+        type: http
+        scheme: bearer
+        bearerFormat: JWT
