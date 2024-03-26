@@ -8,7 +8,7 @@ export const info = {
         },
         servers: [
             {
-                url: "https://localhost:8080",
+                url: "https://ecommerce-qp8i.onrender.com",
             },
         ],
     },
